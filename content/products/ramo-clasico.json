@@ -1,0 +1,12 @@
+{
+  "title": "Ramo Clásico",
+  "description": "Hermoso ramo con flores de temporada, ideal para regalar en cualquier ocasión.",
+  "price": 8000,
+  "categories": ["ramos", "flores"],
+  "variations": [
+    { "name": "Chico", "price": 8000 },
+    { "name": "Mediano", "price": 12000 },
+    { "name": "Grande", "price": 18000 }
+  ],
+  "images": []
+}

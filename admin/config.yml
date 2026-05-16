@@ -1,0 +1,68 @@
+# Decap CMS configuration
+# Docs: https://decapcms.org/docs/
+
+backend:
+  name: git-gateway      # Netlify's Git Gateway — handles GitHub auth for you
+  branch: master
+
+# Where uploaded images are stored in the repo and their public URL
+media_folder: img/products
+public_folder: /img/products
+
+locale: es
+
+collections:
+  - name: products
+    label: Productos
+    label_singular: Producto
+    folder: content/products   # one .json file per product
+    create: true
+    delete: true
+    format: json               # store as plain JSON, no markdown frontmatter
+    slug: "{{slug}}"           # filename = url-safe version of the title
+    identifier_field: title
+    summary: "{{title}} — ${{price}}"
+    fields:
+      - label: Título
+        name: title
+        widget: string
+
+      - label: Descripción
+        name: description
+        widget: text
+
+      - label: Precio base
+        name: price
+        widget: number
+        value_type: float
+        min: 0
+        hint: "Precio mostrado por defecto (sin variación seleccionada)"
+
+      - label: Categorías
+        name: categories
+        widget: list
+        hint: "Clická + para agregar categorías (ej: flores, ramos, coronas)"
+
+      - label: Variaciones
+        name: variations
+        widget: list
+        summary: "{{fields.name}} — ${{fields.price}}"
+        hint: "Opciones del producto con su precio (ej: Chico $500, Grande $900)"
+        fields:
+          - label: Nombre
+            name: name
+            widget: string
+          - label: Precio
+            name: price
+            widget: number
+            value_type: float
+            min: 0
+
+      - label: Imágenes
+        name: images
+        widget: list
+        hint: "Subí fotos del producto. La primera se muestra en la tarjeta."
+        field:
+          label: Imagen
+          name: image
+          widget: image
